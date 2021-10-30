@@ -31,14 +31,14 @@ def register(request):
         request.session['user_id'] = new_user.id
         return redirect ('/success')
 
-def success(request):
+def profile(request):
     if 'user_id' not in request.session:
         return redirect('/')
     this_user = User.objects.filter(id = request.session['user_id'])
     context = {
         'user': this_user[0]
     }
-    return render(request, 'success.html', context)
+    return render(request, 'profile.html', context)
 
 # LOG IN
 
@@ -51,11 +51,88 @@ def login(request):
             return redirect('/')
         this_user = User.objects.filter(email = request.POST['email'])
         request.session['user_id'] = this_user[0].id
-        return redirect('/success')
+        return redirect('/jobs')
     return redirect('/')
 
 # LOG OUT
 def logout(request):
     request.session.flush()
     return redirect('/')
+
+def jobs(request): 
+    if 'user_id' not in request.session:
+        return redirect('/')
+    context ={
+        'user': User.objects.get(id=request.session
+        ['user_id']), 
+        'all_jobs': Job.objects.all()
+    }
+    return render(request, "jobs.html", context)
+
+def create_entry(request):
+    errors = Job.objects.job_validator(request.POST)
+    if errors:
+        for val in errors.values():
+            messages.error(request, val)
+    else:
+
+        Job.objects.create(
+            company_name = request.POST['company_name'], 
+            position = request.POST['position'], 
+            status = request.POST['status'],
+            created_by = User.objects.get(id=request.session['user_id'])
+        )
+    return redirect('/jobs')
+
+def addlisting(request):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    this_user = User.objects.filter(id = request.session['user_id'])
+    context = {
+        'user': this_user[0]
+    }
+    return render(request, 'addlisting.html', context)
+    
+
+def user(request, user_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    context = {
+        "user": User.objects.get(id=user_id)
+    }
+    return render(request, "profile.html", context)
+
+# EDIT ENTRY
+def edit_entry(request, job_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    context = {
+        "job": Job.objects.get(id=job_id)
+    }
+    return render(request, "listingdetails.html", context)
+
+# UPDATE ENTRY
+def update(request, job_id):
+    if 'user_id' not in request.session:
+            return redirect('/')
+    errors = Job.objects.job_validator(request.POST)
+    if errors: 
+        for val in errors.values():
+            messages.error(request, val)
+    else:
+        new_job = Job.objects.get(id=job_id)
+        new_job.company_name = request.POST['company_name']
+        new_job.position = request.POST['position']
+        new_job.status = request.POST['status']
+        new_job.save()
+        messages.success(request, "Job entry successfully updated.")
+    return redirect('/jobs')
+
+# DELETE ENTRY
+def delete(request, job_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    to_delete = Job.objects.get(id=job_id)
+    to_delete.delete()
+    return redirect('/jobs')
 

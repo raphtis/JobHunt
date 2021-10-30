@@ -3,24 +3,17 @@ import re
 import bcrypt
 
 # Create your models here.
-class JobEntryManager(models.Manager):
-    def jobEntry_validator(self, postData):
+class JobManager(models.Manager):
+    def job_validator(self, postData):
         errors = {}
-        if len(postData['company_name']) < 10:
-            errors['company_name'] = "Company name needs to be at least 2 characters."
-
+        if len(postData['company_name']) < 2:
+            errors ['company_name'] = "Company name should be longer than one character."
         if len(postData['position']) < 2:
-            errors['position'] = "Position should be 2 or more characters."
-
+            errors['position'] = "Position should be longer than one character."
         if len(postData['status']) < 2:
-            errors['status'] = "Status should be 2 or more characters."
-
-        current_jobEntries = JobEntry.objects.filter(message=postData['position'])
-        if len(current_jobEntries) > 0:
-            errors['duplicate'] = "That position has already been added."
+            errors['status'] = "Status should be longer than one character."
         return errors
-
-
+        
 
 class UserManager(models.Manager):
     def reg_validator(self, postData):
@@ -73,16 +66,14 @@ class User(models.Model):
     password = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
     objects = UserManager()
 
-class JobEntry(models.Model): 
-    company_name = models.CharField(max_length=255)
-    position = models.CharField(max_length=200)
-    status = models.TextField()
-    created_by = models.ForeignKey(User, related_name="jobEntries", on_delete=models.CASCADE)
+class Job(models.Model):
+    company_name = models.CharField(max_length=50)
+    position = models.CharField(max_length=50)
+    status = models.CharField(max_length=50)
+    created_by = models.ForeignKey(User, related_name="jobs", on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    object = JobEntryManager()
+    objects = JobManager()
 

@@ -1,0 +1,42 @@
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Listing Details</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+    <body>
+        <div class="container container-links">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link" href="/quotes">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <h4>Listing Details</h4>
+            <div class="col">
+                <form action="/jobs/{{job.id}}/update" method="POST">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="company_name">Company Name <input type="text" name="company_name" value="{{ job.company_name }}"></label>
+
+                        <label for="position">Position: <input type="text" name="position" value="{{job.position}}"></label>
+
+                        <label for="status">Status: <input type="text" name="status" value="{{job.status}}"></label>
+
+                        <input type="submit" value="Update" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <a class="btn btn-Dark" href="/jobs" role="button">Cancel </a>
+        </div>
+    </body>
+</html>
