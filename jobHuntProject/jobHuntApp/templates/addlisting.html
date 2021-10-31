@@ -8,37 +8,39 @@
         <link rel="stylesheet" href="/static/css/style.css">
     </head>
     <body>
-        <div class="container container-links">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="/quotes">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
-                </li>
-            </ul>
+        <div class="d-flex justify-content-center">
+            <div class="container container-links">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/jobs">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-
         {% comment %} POST JOB {% endcomment %}
-
-        <div class="container">
-        <h1>Applied to...</h1>
-            <div class="col">
+        <div class="d-flex justify-content-center">
+            <div class="row g-4 px-4 form-div">
+            <h1>Applied to...</h1>
                 <form action="/create_entry" method="POST">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label for="company_name">Company Name: <input type="text" name="company_name"></label>
-
-                        <label for="position">Position: <input type="text" name="position"></label>
-                        <label for="status">Status: <input type="text" name="status"></label>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                    <div class="col">
+                        <label for="company_name">Company Name: <input type="text" name="company_name" class="form-control" placeholder="Company name"></label>
                     </div>
+                    <div class="col">
+                        <label for="position">Position: <input type="text" name="position" class="form-control" placeholder="Position"></label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="status">Status: <input type="text" name="status" class="form-control" placeholder="Status"></label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </form>
             </div>
-        </div> 
-        
-
-        <script src="" async defer></script>
+        </div>
     </body>
 </html>
