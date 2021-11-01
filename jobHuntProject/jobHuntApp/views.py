@@ -134,5 +134,24 @@ def delete(request, job_id):
         return redirect('/')
     to_delete = Job.objects.get(id=job_id)
     to_delete.delete()
+    messages.success(request, "Job removed from list.")
     return redirect('/jobs')
 
+#FOLLOW UP CLICK
+def followUp(request, job_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    job = Job.objects.get(id=job_id)
+    user = User.objects.get(id=request.session['user_id'])
+    job.users_follow_up.add(user)
+    job.save()
+    messages.success(request, "Job marked for follow up.")
+    return redirect('/jobs')
+
+def noFollowUp(request, job_id):
+    if 'user_id' not in request.session:
+        return redirect('/')
+    job = Job.objects.get(id=job_id)
+    user = User.objects.get(id=request.session['user_id'])
+    job.users_follow_up.remove(user)
+    return redirect('/jobs')

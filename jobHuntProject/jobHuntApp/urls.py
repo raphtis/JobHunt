@@ -13,6 +13,8 @@ urlpatterns = [
     path('create_entry', views.create_entry),
     path('addlisting', views.addlisting),
     path('users/<int:user_id>', views.user), 
+    path('followUp/<int:job_id>/', views.followUp),
+    path('noFollowUp/<int:job_id>/', views.noFollowUp),
     path('jobs/<int:job_id>/edit', views.edit_entry), 
     path('jobs/<int:job_id>/update', views.update),
     path('jobs/<int:job_id>/delete', views.delete),

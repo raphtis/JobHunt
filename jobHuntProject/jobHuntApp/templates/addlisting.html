@@ -24,7 +24,7 @@
         {% comment %} POST JOB {% endcomment %}
         <div class="d-flex justify-content-center">
             <div class="row g-4 px-4 form-div">
-            <h1>Applied to...</h1>
+            <h1 class="display-2">Applied to...</h1>
                 <form action="/create_entry" method="POST">
                     {% csrf_token %}
                     <div class="col">
@@ -39,6 +39,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
+                    <a class="btn btn-Dark" href="/jobs" role="button">Cancel </a>
                 </form>
             </div>
         </div>

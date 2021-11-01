@@ -11,15 +11,19 @@
         <link rel="stylesheet" href="/static/css/style.css">
     </head>
     <body>
-    <div class="container"><h1>Profile</h1></div>
+    <div class="container"><h1 class="display-2">Profile</h1></div>
         <div class="d-flex justify-content-center">
             <div class="card" style="width: 40rem;">
                 <div class="card-body">
                     <h4 class="card-title"> Total Entries Added: {{user.jobs.all | length}}</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Marked for Follow Up</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Marked for Follow Up: {{current_user.job.user_follow_up}}</h6>
                     {% for job in user.jobs.all%}
-                <p class="card-text">{{job.status}} - {{job.company_name}}</p>
-            {% endfor %}
+                        {% if this_user in current_user.job.user_follow_up.all %}
+                        <p><a href="/jobs/{{job.id}}">{{job.company_name}}</a></p>
+
+                        <p class="card-text">{{job.status}} - {{job.company_name}}</p>
+                        {% endif %}
+                    {% endfor %}
                     <a class="btn btn-dark" href="/addlisting" role="button">Add Entry</a>
                 </div>
             </div>

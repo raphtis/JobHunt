@@ -1,16 +1,34 @@
+* {
+    /* border: 1px lightcoral solid; */
+}
+
 body {
-    background-color: rgb(154, 207, 200);
-    width: 800px;
+    background-color: #F0ECE3;
+    /* width: 800px; */
+}
+
+h6 {
+    color: #596E79;
+}
+
+p {
+    color: #596E79;
+}
+
+td {
+    color: #596E79;
+}
+a {
+    text-decoration: none;
+    color: #596E79;
+}
+
+.form-div label {
+    color: #596E79;
 }
 
 .form-div {
-    background-color: antiquewhite;
+    background-color: #DFD3C3;
     margin-top: 20px;
-    opacity: 80%;
-    width: 600px;
-}
-
-a {
-    text-decoration: none;
-    color: black;
+    width: 500px;
 }

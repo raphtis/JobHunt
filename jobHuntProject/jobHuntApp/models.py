@@ -73,6 +73,7 @@ class Job(models.Model):
     position = models.CharField(max_length=50)
     status = models.CharField(max_length=50)
     created_by = models.ForeignKey(User, related_name="jobs", on_delete=models.CASCADE, null=True)
+    users_follow_up = models.ManyToManyField(User, related_name="jobs_users_marked")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = JobManager()
