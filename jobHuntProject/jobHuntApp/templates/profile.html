@@ -11,12 +11,13 @@
         <link rel="stylesheet" href="/static/css/style.css">
     </head>
     <body>
-    <div class="container"><h1 class="display-2">Profile</h1></div>
+    {% include "navBar.html" %}
+    <h1 class="display-2 text-center">Profile</h1>
         <div class="d-flex justify-content-center">
             <div class="card" style="width: 40rem;">
                 <div class="card-body">
                     <h3 class="card-title"> Total Entries Added: {{user.jobs.all | length}}</h3>
-                    <h4 class="card-subtitle mb-2 text-muted">Marked for Follow Up:</h4>
+                    <h4 class="card-subtitle mb-2 text-muted">Marked for Follow Up: </h4>
 
                     {% for job in user.jobs.all reversed%}
                         {% if job.users_follow_up.all %}
@@ -29,8 +30,6 @@
                 </div>
             </div>
         </div>
-        
-        <script src="" async defer></script>
     </body>
 </html>
 

@@ -8,39 +8,37 @@
         <link rel="stylesheet" href="/static/css/style.css">
     </head>
     <body>
-        <div class="d-flex justify-content-center">
-            <div class="container container-links">
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/jobs">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
+        {% include "navBar.html" %}
+        <h1 class="display-2 text-center">Applied to...</h1>
         {% comment %} POST JOB {% endcomment %}
-        <div class="d-flex justify-content-center">
-            <div class="row g-4 px-4 form-div">
-            <h1 class="display-2">Applied to...</h1>
-                <form action="/create_entry" method="POST">
-                    {% csrf_token %}
-                    <div class="col">
-                        <label for="company_name">Company Name: <input type="text" name="company_name" class="form-control" placeholder="Company name"></label>
+        <div class="container mx-auto">
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }} alert alert-danger"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+                <div class="card mx-auto" style="width:600px">
+                    <div class="card-body">
+                        <form action="/create_entry" method="POST">
+                        {% csrf_token %}
+                            <div class="form-group row">
+                                <label for="company_name">Company Name: <input type="text" name="company_name" class="form-control" placeholder="What was the company's name?"></label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="position">Position: <input type="text" name="position" class="form-control" placeholder="Which position did you apply for?"></label>
+                            </div>
+                            <div class="form-group row">
+                                <label for="status">Status: <input type="text" name="status" class="form-control" placeholder="What is the current status of your application?"></label>
+                            </div>
+                            <div class="col text-center">
+                                <button type="submit" class="btn btn-Dark">Submit</button>
+                                <a class="btn btn-Dark" href="/jobs" role="button">Cancel </a>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col">
-                        <label for="position">Position: <input type="text" name="position" class="form-control" placeholder="Position"></label>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="status">Status: <input type="text" name="status" class="form-control" placeholder="Status"></label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <a class="btn btn-Dark" href="/jobs" role="button">Cancel </a>
-                </form>
+                </div>
             </div>
         </div>
     </body>

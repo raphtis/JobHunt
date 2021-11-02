@@ -23,12 +23,25 @@ a {
     color: #596E79;
 }
 
+.btn {
+    margin: 10px 10px 0 10px;
+    border: 4px #596E79 solid;
+    opacity: 60%;
+}
+
+.navbar-nav li {
+    padding: 0 20px;
+}
+
+.app_title {
+    font-size: 2rem;
+    padding: 0 20px;
+}
+
+
 .form-div label {
     color: #596E79;
 }
 
-.form-div {
-    background-color: #DFD3C3;
-    margin-top: 20px;
-    width: 500px;
-}
+
+

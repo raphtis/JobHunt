@@ -74,6 +74,7 @@ def create_entry(request):
     if errors:
         for val in errors.values():
             messages.error(request, val)
+        return redirect ('/addlisting')
     else:
 
         Job.objects.create(
@@ -119,11 +120,14 @@ def update(request, job_id):
     if errors: 
         for val in errors.values():
             messages.error(request, val)
+        
     else:
+        user = User.objects.get(id=request.session['user_id'])
         new_job = Job.objects.get(id=job_id)
         new_job.company_name = request.POST['company_name']
         new_job.position = request.POST['position']
         new_job.status = request.POST['status']
+        new_job.users_follow_up.remove(user)
         new_job.save()
         messages.success(request, "Job entry successfully updated.")
     return redirect('/jobs')
