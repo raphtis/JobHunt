@@ -22,6 +22,7 @@
             {% endif %}
             {% comment %} VIEW Job Entry WITH EDIT BUTTON IF USER CREATED IT {% endcomment %}
             </div> 
+                <a class="btn btn-dark" href="/profile" role="button">Profile</a>
                 <a class="btn btn-dark" href="/addlisting" role="button">Add Entry</a>
                 <a class="btn btn-secondary" href="/logout" role="button">Logout</a>
             </div>
@@ -31,7 +32,6 @@
             <table class="table table-striped">
             <thead>
                 <tr>
-                <th scope="col">#</th>
                 <th scope="col">Compnay Name</th>
                 <th scope="col">Position </th>
                 <th scope="col">Status</th>
@@ -43,22 +43,24 @@
             
                 <tr>
             {% for job in all_jobs reversed%}
-                <th scope="row">1</th>
-                <td><a href="/jobs/{{job.id}}/edit">{{job.company_name}}</a></td>
-                <td>{{job.position}}</td>
-                <td>{{job.status}}</td>
+                {% if job.created_by.id == user.id %}
+                    <td><a href="/jobs/{{job.id}}/edit">{{job.company_name}}</a></td>
+                    <td>{{job.position}}</td>
+                    <td>{{job.status}}</td>
 
-                <td><a href="/followUp/{{job.id}}">{{job.users_follow_up.all.count}} Marked for Follow Up</a></td>
-        
+                    {% if job.users_follow_up.all %}
+                        <td><a href="/followUp/{{job.id}}"> Marked for follow Up</a></td>
+                    {% else %}
+                        <td><a href="/followUp/{{job.id}}"> Follow Up</a></td>
+                    {% endif %}
 
-                <td><a href="/jobs/{{job.id}}/delete">Remove</a></td>
-                </tr>
+                    <td><a href="/jobs/{{job.id}}/delete">Remove</a></td>
+                    </tr>
+                {% endif %}
             {%endfor%}
             </tbody>
             </table>
             
         </div>
-
-
     </body>
 </html>

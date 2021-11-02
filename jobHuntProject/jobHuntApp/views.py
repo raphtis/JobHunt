@@ -29,7 +29,7 @@ def register(request):
         )
         # create a new session
         request.session['user_id'] = new_user.id
-        return redirect ('/success')
+        return redirect ('/jobs')
 
 def profile(request):
     if 'user_id' not in request.session:

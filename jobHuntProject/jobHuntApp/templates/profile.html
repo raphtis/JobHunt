@@ -15,16 +15,17 @@
         <div class="d-flex justify-content-center">
             <div class="card" style="width: 40rem;">
                 <div class="card-body">
-                    <h4 class="card-title"> Total Entries Added: {{user.jobs.all | length}}</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Marked for Follow Up: {{current_user.job.user_follow_up}}</h6>
-                    {% for job in user.jobs.all%}
-                        {% if this_user in current_user.job.user_follow_up.all %}
-                        <p><a href="/jobs/{{job.id}}">{{job.company_name}}</a></p>
+                    <h3 class="card-title"> Total Entries Added: {{user.jobs.all | length}}</h3>
+                    <h4 class="card-subtitle mb-2 text-muted">Marked for Follow Up:</h4>
 
-                        <p class="card-text">{{job.status}} - {{job.company_name}}</p>
+                    {% for job in user.jobs.all reversed%}
+                        {% if job.users_follow_up.all %}
+                            <p class="card-text"><a href="/jobs/{{job.id}}/edit">{{job.company_name}} - {{job.status}}</a></p>
                         {% endif %}
                     {% endfor %}
+                    
                     <a class="btn btn-dark" href="/addlisting" role="button">Add Entry</a>
+                    <a class="btn btn-dark" href="/jobs" role="button">Job List</a>
                 </div>
             </div>
         </div>
@@ -32,3 +33,6 @@
         <script src="" async defer></script>
     </body>
 </html>
+
+
+                
