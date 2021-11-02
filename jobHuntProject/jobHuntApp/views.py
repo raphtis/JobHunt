@@ -83,6 +83,7 @@ def create_entry(request):
             status = request.POST['status'],
             created_by = User.objects.get(id=request.session['user_id'])
         )
+        messages.success(request, "Job entry successfully added.")
     return redirect('/jobs')
 
 def addlisting(request):

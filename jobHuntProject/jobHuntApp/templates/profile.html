@@ -17,15 +17,16 @@
             <div class="card" style="width: 40rem;">
                 <div class="card-body">
                     <h3 class="card-title"> Total Entries Added: {{user.jobs.all | length}}</h3>
-                    <h4 class="card-subtitle mb-2 text-muted">Marked for Follow Up: </h4>
+                    <h4 class="card-subtitle mb-2 text-muted">Marked for Follow Up - </h4>
 
                     {% for job in user.jobs.all reversed%}
                         {% if job.users_follow_up.all %}
                             <p class="card-text"><a href="/jobs/{{job.id}}/edit">{{job.company_name}} - {{job.status}}</a></p>
+                            <hr>
                         {% endif %}
                     {% endfor %}
                     
-                    <a class="btn btn-dark" href="/addlisting" role="button">Add Entry</a>
+                    <a class="btn btn-dark" href="/addlisting" role="button">Add an Entry</a>
                     <a class="btn btn-dark" href="/jobs" role="button">Job List</a>
                 </div>
             </div>

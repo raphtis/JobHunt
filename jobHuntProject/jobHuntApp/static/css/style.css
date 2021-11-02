@@ -29,6 +29,9 @@ a {
     opacity: 60%;
 }
 
+.navbar {
+    border-bottom: 4px #596E79 solid;
+}
 .navbar-nav li {
     padding: 0 20px;
 }
@@ -43,5 +46,9 @@ a {
     color: #596E79;
 }
 
+
+.data_table, .card {
+    border: 4px #596E79 solid;
+}
 
 
