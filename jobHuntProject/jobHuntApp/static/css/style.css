@@ -3,6 +3,8 @@
     src: url(/static/css/Bright.ttf);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
 * {
     /* border: 1px lightcoral solid; */
     color: #21282e;
@@ -17,6 +19,8 @@ body {
 
 h1 {
     margin: 15px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
 }
 
 .display-6 {
@@ -94,4 +98,7 @@ a:hover {
     color: #607d82; 
 }
 
+.card a {
+    font-size: 15px;
+}
 
