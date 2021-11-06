@@ -53,6 +53,12 @@ a:hover {
     cursor:pointer;  
 }
 
+ul {
+    list-style-type: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
 .btn {
     margin: 10px 10px 0 10px;
     border: 4px #607d82 solid;
@@ -69,7 +75,11 @@ a:hover {
 .navbar-nav li {
     padding: 0 20px;
     letter-spacing: 1px;
-    font-size: 18px;
+    font-size: 20px;
+}
+
+.navbar-light .navbar-nav .nav-link  {
+    color: #c4ab72;
 }
 
 .app_title {
